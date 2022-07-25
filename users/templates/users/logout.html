@@ -1,9 +1,33 @@
-{% extends "blog/base.html" %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+
+    <!--===============================LEFT=========================--->
+<div class="left">
+    
+</div>
+<!---------------------END OF LEFT----------------------->
+    <!--===============================MIDDLE=========================--->
+<div class="middle">
+
+        
     <h2>You have been logged out.</h2>
     <div class="border-top pt-3">
         <small class="text-muted">
             <a href="{% url 'login' %}">Log In Again</a>
         </small>
     </div>
+
+</div>
+
+<!--===============================RIGHT=========================--->
+<div class="right">
+
+
+
+    
+</div>
+
 {% endblock content %}
+
+

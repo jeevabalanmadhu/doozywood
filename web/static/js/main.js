@@ -4,7 +4,7 @@ $('#like').click(
         var this_ = $(this)
         var likedUrl = this_.attr("data-url")
         var likeIcon = $('#like-icon')
-        var likeCount = $('#likes_count')
+        var likeCount = $('#likes_count') 
 
         $.ajax({
             method: "GET",
@@ -12,12 +12,12 @@ $('#like').click(
             success: function (data) {
                 if (data.liked) {
                     likeIcon.removeClass();
-                    likeIcon.addClass('fas fa-heart fa-3x');
+                    likeIcon.addClass('fas fa-heart fa-2x');
                     likeCount.text(data.likes_count)
                     
                 } else {
                     likeIcon.removeClass();
-                    likeIcon.addClass('far fa-heart fa-3x');
+                    likeIcon.addClass('far fa-heart fa-2x');
                     likeCount.text(data.likes_count)
                 }
             },

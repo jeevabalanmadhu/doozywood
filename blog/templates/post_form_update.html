@@ -13,27 +13,41 @@
 <div class="middle">
     
     <div class="content-section">
-        <form method="POST">
+        
+
+          <form method="POST" enctype="multipart/form-data">
+
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Change Password</legend>
+            <fieldset class="form-group" >
+                <legend class="border-bottom mb-4">Update</legend>
+                
                 {{ form|crispy }}
+
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Change Password</button>
+                <button class="btn btn-outline-info" type="submit">Post</button>
             </div>
         </form>
+        
     </div>
+    <!-- Medium Editor -->
+    <script>var editor = new MediumEditor('.editable');</script>
     
 </div>
     <!--===============================RIGHT=========================--->
 <div class="right">
-    
     
 
         
 </div>
 
 {% endblock content %}
+{% block javascript %}
+<script>
+$('#id_post_select').on('change', function(){
+    $(this).closest('form').submit();
+});
+</script>
+{% endblock javascript %}
 
 

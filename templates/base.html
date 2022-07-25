@@ -1,0 +1,214 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doozywood - Social media for global film industry</title>
+    <!-- ICONSOUT CDN-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+
+       
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Medium Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+    type="text/css" media="screen" charset="utf-8">
+  
+  
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static '/css/main.css' %}"> -->
+
+    
+</head>
+
+<body>
+    
+    <nav>
+        <div class="container">
+                <a href="/" >
+                    <h4 class="log">
+                        Doozywood
+                    </h4>
+                </a>
+            
+            <div class="search-bar">
+                <i class="uil uil-search"></i>
+                <input type="search" placeholder="Search for films, talents, location, rents and contactss">
+            </div>
+            <div class="create">
+                <div class="phone-icon">
+                    
+                </div>
+                <a href="#" class="menu-item" id="explore" >
+                    <span><i class="uil uil-compass" ></i></span>
+                </a>
+                <a href="#" class="menu-item" id="theme" >
+                    <span><i class="uil uil-palette" ></i></span>
+                </a>
+                <a href="/post/new" class="menu-item" >
+                    <span><i class="uil uil-plus-circle"></i></span>
+                </a>
+
+                {% if user.is_authenticated %}
+                <div class="profile-photo" >
+                    <a href="#" class="menu-item" id="profile" >
+                        <img src="{{ user.profile.image.url }}" >
+                    </a>
+                    
+                </div>
+                {% else %}
+                <a href="/login" class="menu-item" >
+                    <span><i class="uil uil-signin"></i></i></span>
+                </a>
+                {% endif %}
+                
+            </div>
+        </div>
+    </nav>
+
+    <!------------------------MAIN--------------------->
+    <main>
+        
+        <div class="container">
+            
+            {% block content %}
+
+            {% endblock content %}
+                
+        </div>
+    </main>
+    
+
+<!---========== THEME CUSTOMIZATION=======================-->
+
+<div class="customize-theme">
+    <div class="card">
+        <!-- <h2>Customize your view</h2>
+        <p class="text-muted">Manage your font size, color, and backgroud.</p> -->
+
+        <!-------------------FONT SIZES------------------->
+        <div class="font-size">
+            <h4>Font Size</h4>
+            <div>
+                <h6>Aa</h6>
+            <div class="choose-size">
+                <span class="font-size-1"></span>
+                <span class="font-size-2 "></span>
+                <span class="font-size-3 "></span>
+                <span class="font-size-4 active"></span>
+                <span class="font-size-5"></span>
+            </div>
+            <h3>Aa</h3>
+            </div>
+        </div>
+
+        <!-----------PRIMARY COLORS------------------>
+        <div class="color">
+            <h4>Color</h4>
+            <div class="choose-color">
+                <span class="color-1 active"></span>
+                <span class="color-2"></span>
+                <span class="color-3"></span>
+                <span class="color-4"></span>
+                <span class="color-5"></span>
+            </div>
+        </div>
+
+        <!------------- BACKGROUND COLORS ------------------>
+        <div class="background">
+            <h4>Background</h4>
+            <div class="choose-bg">
+                <div class="bg-1 active">
+                    <span></span>
+                    <h5 for="bg-1">Light</h5>
+                </div>
+                <div class="bg-2">
+                    <span></span>
+                    <h5>Dim</h5>
+                </div>
+                <div class="bg-3">
+                    <span></span>
+                    <h5>Dark</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="profile-links">
+    <div class="card">
+
+    <div class="profile-button">
+       <a class="btn btn-outline-primary" href="/profile" role="button">Profile</a>
+       <a class="btn btn-outline-secondary" href="/logout" role="button">Logout</a>
+    </div>
+
+    </div>
+</div>
+
+<div class="explore-links">
+    <div class="card">
+        
+    <div class="profile-button">
+        <h2>Best short films</h2>
+       <a class="btn-link " href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best World Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Silent Short films</a>
+       <a class="btn-link" href="/#" role="button">Award winning Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <h2>Upcoming short film contest</h2>
+       <a class="btn-link " href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best World Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Silent Short films</a>
+       <a class="btn-link" href="/#" role="button">Award winning Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <h2>Check technicians near by</h2>
+       <a class="btn-link " href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best World Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Silent Short films</a>
+       <a class="btn-link" href="/#" role="button">Award winning Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+       <a class="btn-link" href="/#" role="button">Best Indian Short films</a>
+    </div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+{% block javascript %}
+
+{% endblock javascript %}
+</body>
+</html>

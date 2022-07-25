@@ -1,0 +1,229 @@
+
+{% extends "base1.html" %}
+{% load static %}
+{% load embed_video_tags %}
+{% block content %}
+
+            
+    <!--===============================LEFT=========================--->
+<div class="left">
+    {% if user.is_authenticated %}
+    
+    <div class="profile">
+        
+            <div class="profile-photo">
+                <img src="{{ user.profile.image.url }}" alt=""></a>
+            </div>
+            <div class="handle">
+                <p class="text-muted">
+                    <a href="/profile"> @{{ user.profile.user }}  </a>
+                    
+                </p>
+                
+            </div>
+       
+        
+        
+    </div>
+    
+   
+    <hr>
+    
+
+
+        <!------------------------SIDEBAR---------------------------------->
+        <div class="sidebar">
+        <a href="/" class="menu-item active" >
+            <span><i class="uil uil-home"></i></span><h3>Home</h3>
+        </a>
+        <a href="/profile" class="menu-item" id="notifications" >
+            <span><i class="uil uil-bell"></i></span><h3>Profile</h3>
+        </a>
+        
+        <a href="/logout" class="menu-item" >
+            <span><i class="uil uil-sign-out-alt"></i></span><h3>Logout</h3>
+        </a>
+        
+        </div>
+        {% else %}
+        <div class="sidebar">
+            <a href="/" class="menu-item active" >
+                <span><i class="uil uil-home"></i></span><h3>Home</h3>
+            </a>
+            <a href="/login" class="menu-item" >
+                <span><i class="uil uil-signin"></i></span><h3>Login</h3>
+            </a>
+        </div>
+
+    {% endif %}
+        <!---------------------END OF SIDEBAR----------------------->
+        <!-- <label for="create-post" class="btn btn-primary">Create Post</label> -->
+</div>
+<!---------------------END OF LEFT----------------------->
+    <!--===============================MIDDLE=========================--->
+<div class="middle">
+    
+        <!----------------------------FEEDS---------------->
+        <div class="feeds">
+            <!----------------------------FEED 1---------------->
+            {% for post in posts %}
+            <div class="feed">
+                <div class="head">
+                    <div class="user">
+                        <a class="profile">
+                            <div class="profile-photo">
+                                
+                                <img src="{{ post.author.profile.image.url }}" >
+                            </div>
+                          </a>
+
+                        <div class="ingo">
+                            <a href="{% url 'user_posts' post.author.username %}"><h7>{{ post.author }} </h7></a>
+                            <small>{{post.title}}</small>
+                            <br>
+                            <small>{{ post.date_posted|date:"F d, Y" }} </small>
+
+                        </div>
+                    </div>
+                    <span class="edit">
+                        <a href="{% url 'post_detail' post.pk %}"><i class="uil uil-ellipsis-h"></i></a></p>
+                    </span>
+                </div>
+                
+                
+                <div class="photo">
+
+                    
+
+                    <div class="video-container">
+                        {% video post.video_link as my_video %}
+                
+                            {% if my_video.url %}
+                                
+                                {% if post.img %}
+                                
+                                    <img src="{{post.img.url}}" >
+
+                                {% else %}
+                                    <img src="{{ my_video.thumbnail }}" alt="My Awesome Video">
+                                {% endif %}
+                                
+                                    
+                                 
+                                <div class="overlay">
+                                
+                                    <a href="{% url 'post_detail' post.pk %}" class="icon" title="User Profile">
+                                        <!-- <i class="fa fa-youtube-play" style="font-size:48px;color:red"></i> -->
+                                        <!-- <i class="fa fa-youtube-play" style="font-size:100px"></i> -->
+                                        <i class="fa fa-play" style="font-size:48px;color:rgba(223, 237, 250, 0.5)"></i>
+                                        <!-- <i class="bi bi-play"></i> -->
+                                    </a>
+                                </div>
+                            {% endif %}
+               
+                        {% endvideo %}
+
+                    
+                    </div>
+
+                
+
+                    <!-- <h1>{{post.image}}</h1> -->
+                    
+                
+                        
+                        {% if not '1' == post.form_choice %}
+                       
+                            {% if post.img %}
+                            
+                                <a href="{% url 'post_detail' post.pk %}"><img src="{{post.img.url}}" ></a>
+                                
+
+
+                            {% endif %}
+                                    
+                        {% endif %}
+                    
+                                
+                
+
+                </div>
+                <!-- <div class="action-buttons">
+                    <div class="interaction-buttons">
+                        <span><i class="uil uil-heart"></i></span>
+                        <span><i class="uil uil-comment-dots"></i></span>
+                        <span><i class="uil uil-share"></i></span>
+                    </div>
+                    <div class="bookmark">
+                        <span><i class="uil uil-bookmark"></i></span>
+                    </div>
+                </div>
+                <div class="liked-by">
+                    <span><img src="./images/profile-10.jpg" alt=""></span>
+                    <span><img src="./images/profile-17.jpg" alt=""></span>
+                    <span><img src="./images/profile-20.jpg" alt=""></span>
+                    <p>Liked by <b>Prakash</b> and <b>2,345 others</b></p>
+                </div> -->
+
+                <div class="caption">
+                    <p >{{ post.description|truncatechars_html:200 }} {{ post.tags|truncatechars_html:100 }}  <a href="{% url 'post_detail' post.pk %}">more</a></p>
+                </div>
+                <!-- <div class="comments text-muted">View all 122 comments</div> -->
+                
+                {% if post.liked.count %}
+                    <p id="likes_count" style="color: rgb(37, 37, 37)">{{post.liked.count}} liked</p>
+                {% endif %}
+            </div>
+
+
+            {% endfor %}
+            <!----------------END OF FEED ------------------>
+            {% if is_paginated %}
+            {% if page_obj.has_previous %}
+              <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+              <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+      
+            {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% endif %}
+            {% endfor %}
+      
+            {% if page_obj.has_next %}
+              <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+              <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+          {% endif %}
+            
+
+        </div>
+
+        <!----------------============ END OF FEEDS =========------------------>
+    
+</div>
+    <!--===============================RIGHT=========================--->
+<div class="right">
+    
+    <div class="messages">
+        
+            <div class="heading">
+                <h4>Filter catagory</h4>
+            </div>
+            <!-------------------Search bar ---------------->
+            <div class="search-bar">
+                <!-- <i class="uil uil-search"></i> -->
+                <input type="search" placeholder="Search Post" id="message-search">
+            </div>
+            <!-------------------MESSAGES CATEGORY ---------------->
+            <div class="category">
+                
+            </div>
+        </div>
+
+        
+</div>
+
+{% endblock content %}

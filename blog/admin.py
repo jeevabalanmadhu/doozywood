@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import Post, Comment
+from embed_video.admin import AdminVideoMixin
 
 
-class PostAdmin(admin.ModelAdmin):
+
+class PostAdmin(AdminVideoMixin,admin.ModelAdmin):
     list_display = ('id', 'title', 'author', 'date_posted')
     list_display_links = ('id', 'title')
     list_filter = ('author', 'date_posted')

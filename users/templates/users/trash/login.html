@@ -1,16 +1,6 @@
-{% extends "base.html" %}
+{% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-    <!--===============================LEFT=========================--->
-<div class="left">
-    
-</div>
-<!---------------------END OF LEFT----------------------->
-    <!--===============================MIDDLE=========================--->
-<div class="middle">
-
-        
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -31,15 +21,4 @@
             </small>
         </div>
     </div>
-
-</div>
-
-<!--===============================RIGHT=========================--->
-<div class="right">
-
-
-
-    
-</div>
-
 {% endblock content %}
